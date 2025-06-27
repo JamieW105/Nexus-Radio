@@ -1,31 +1,63 @@
-import axios from 'axios';
+const API_BASE_URL = 'https://discord.com/api'; // Use Discord API base URL
 
-const API_BASE_URL = 'https://your-api-url.com/api'; // Replace with your actual API URL
+// Types for function parameters
+interface CallData {
+    channelId: string;
+    message: string;
+}
+interface UnitData {
+    channelId: string;
+    message: string;
+}
 
-export const logCall = async (callData) => {
+// Log a call (example: create a channel or send a message)
+export const logCall = async (callData: CallData, accessToken: string) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/calls`, callData);
-        return response.data;
+        const response = await fetch(`${API_BASE_URL}/channels/${callData.channelId}/messages`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bot ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content: callData.message }),
+        });
+        if (!response.ok) throw new Error('Error logging call');
+        return response.json();
     } catch (error) {
         console.error('Error logging call:', error);
         throw error;
     }
 };
 
-export const dispatchUnit = async (unitData) => {
+// Dispatch a unit (example: send a message to a dispatch channel)
+export const dispatchUnit = async (unitData: UnitData, accessToken: string) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/dispatch`, unitData);
-        return response.data;
+        const response = await fetch(`${API_BASE_URL}/channels/${unitData.channelId}/messages`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bot ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content: unitData.message }),
+        });
+        if (!response.ok) throw new Error('Error dispatching unit');
+        return response.json();
     } catch (error) {
         console.error('Error dispatching unit:', error);
         throw error;
     }
 };
 
-export const getCallLogs = async () => {
+// Get call logs (example: fetch messages from a channel)
+export const getCallLogs = async (channelId: string, accessToken: string) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/calls`);
-        return response.data;
+        const response = await fetch(`${API_BASE_URL}/channels/${channelId}/messages`, {
+            headers: {
+                'Authorization': `Bot ${accessToken}`,
+            },
+        });
+        if (!response.ok) throw new Error('Error fetching call logs');
+        return response.json();
     } catch (error) {
         console.error('Error fetching call logs:', error);
         throw error;
