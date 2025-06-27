@@ -1,0 +1,68 @@
+.main-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.header {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.logo {
+  width: 64px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #b0b0b0;
+  margin-top: 0.5rem;
+}
+
+.actions {
+  margin: 40px 0 20px 0;
+  display: flex;
+  gap: 20px;
+}
+
+.login-btn, .dispatch-btn, .log-btn {
+  background: #44b700;
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(68,183,0,0.15);
+}
+.login-btn:hover, .dispatch-btn:hover, .log-btn:hover {
+  background: #388e00;
+}
+
+.radio-visualizer {
+  display: flex;
+  align-items: flex-end;
+  height: 60px;
+  gap: 4px;
+  margin-top: 40px;
+}
+.bar {
+  width: 8px;
+  height: 20px;
+  background: #44b700;
+  border-radius: 4px;
+  animation: bounce 1s infinite alternate;
+}
+@keyframes bounce {
+  to {
+    height: 60px;
+    background: #fff;
+  }
+}
