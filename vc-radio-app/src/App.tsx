@@ -5,7 +5,6 @@ export default function App() {
   return (
     <div className="main-bg">
       <header className="header">
-        <img src="radio.svg" alt="Radio Logo" className="logo" />
         <h1>Nexus-Radio</h1>
         <p className="subtitle">Live VC Dispatch & Radio Integration</p>
       </header>
@@ -15,7 +14,6 @@ export default function App() {
         <button className="log-btn">View Call Log</button>
       </div>
       <div className="radio-visualizer">
-        {/* Add a simple animated bar visualizer */}
         {[...Array(10)].map((_, i) => (
           <div key={i} className="bar" style={{ animationDelay: `${i * 0.1}s` }} />
         ))}
