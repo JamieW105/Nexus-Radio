@@ -105,6 +105,7 @@
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // For GitHub Pages: handle OAuth2 redirect_uri with possible trailing slash or subfolder
       const params = new URLSearchParams(window.location.search);
       const isLoggedIn = params.has('code');
       const dispatchBtn = document.querySelector('.dispatch-btn');
@@ -127,6 +128,13 @@
           logBtn.removeAttribute('disabled');
           logBtn.title = '';
         }
+      }
+      // Fix for GitHub Pages: if the code param is present, remove it from the URL (optional, for cleaner URLs)
+      if (isLoggedIn && window.location.search.includes('code=')) {
+        const url = new URL(window.location.href);
+        params.delete('code');
+        url.search = params.toString();
+        window.history.replaceState({}, document.title, url.pathname + url.search);
       }
     });
   </script>
